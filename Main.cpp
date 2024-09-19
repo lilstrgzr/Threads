@@ -1,13 +1,13 @@
-#include <iostream>
-#include <thread> //Подключение библиотеки для создания потоков и управления ими
-#include <chrono> //Подключение библиотеки, содержащей в себе команды для управления временем в стиле языка с++
-#include <conio.h>//Библиотека языка С для удобного взаимодействия с консолью
+п»ї#include <iostream>
+#include <thread> //РџРѕРґРєР»СЋС‡РµРЅРёРµ Р±РёР±Р»РёРѕС‚РµРєРё РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РїРѕС‚РѕРєРѕРІ Рё СѓРїСЂР°РІР»РµРЅРёСЏ РёРјРё
+#include <chrono> //РџРѕРґРєР»СЋС‡РµРЅРёРµ Р±РёР±Р»РёРѕС‚РµРєРё, СЃРѕРґРµСЂР¶Р°С‰РµР№ РІ СЃРµР±Рµ РєРѕРјР°РЅРґС‹ РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РІСЂРµРјРµРЅРµРј РІ СЃС‚РёР»Рµ СЏР·С‹РєР° СЃ++
+#include <conio.h>//Р‘РёР±Р»РёРѕС‚РµРєР° СЏР·С‹РєР° РЎ РґР»СЏ СѓРґРѕР±РЅРѕРіРѕ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ РєРѕРЅСЃРѕР»СЊСЋ
 #include<string>
 #include <Windows.h>
 
 void doSomething() {
 	for (size_t i = 0; i < 10; ++i) {
-		std::cout << "Thread №" << std::this_thread::get_id() << "\tdoSomething\t" << i << std::endl;
+		std::cout << "Thread в„–" << std::this_thread::get_id() << "\tdoSomething\t" << i << std::endl;
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	}
 }
@@ -15,27 +15,27 @@ void doSomething() {
 void calculate(double num1, double num2) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 	
-	std::cout << "Thread №" << std::this_thread::get_id() << "\tSTART CALCULATE======================\n";
+	std::cout << "Thread в„–" << std::this_thread::get_id() << "\tSTART CALCULATE======================\n";
 	
 	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 	
-	std::cout << "Thread №" << std::this_thread::get_id() << "\t" << num1 << " + " << num2 << " = " << num1 + num2 << std::endl;
+	std::cout << "Thread в„–" << std::this_thread::get_id() << "\t" << num1 << " + " << num2 << " = " << num1 + num2 << std::endl;
 	
 	std::this_thread::sleep_for(std::chrono::milliseconds(1500));
 	
-	std::cout << "Thread №" << std::this_thread::get_id() << "\tEND CALCULATE========================\n";
+	std::cout << "Thread в„–" << std::this_thread::get_id() << "\tEND CALCULATE========================\n";
 }
 
 void calculateTo(double& result,double num1, double num2) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	
-	std::cout << "Thread №" << std::this_thread::get_id() << "\tSTART CALCULATE TO REF==============\n";
+	std::cout << "Thread в„–" << std::this_thread::get_id() << "\tSTART CALCULATE TO REF==============\n";
 	
 	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 	
 	result = num1 + num2;
 
-	std::cout << "Thread №" << std::this_thread::get_id() << "\tEND CALCULATE TO REF================\n";
+	std::cout << "Thread в„–" << std::this_thread::get_id() << "\tEND CALCULATE TO REF================\n";
 }
 
 void pressBtn(char& key, bool& pressed) {
@@ -64,16 +64,16 @@ int main() {
 	setlocale(LC_ALL, "russian");
 	double n;
 
-	//Потоки
+	//РџРѕС‚РѕРєРё
 	/*
 	std::cout << "START\n";
 
-	//doSomething(); //Плохо, так как нагружается основной поток
-	//calculate(5, 8); //Плохо, так как нагружается основной поток
-	//calculateTo(n, 57, 25); //Плохо, так как нагружается основной поток
+	//doSomething(); //РџР»РѕС…Рѕ, С‚Р°Рє РєР°Рє РЅР°РіСЂСѓР¶Р°РµС‚СЃСЏ РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє
+	//calculate(5, 8); //РџР»РѕС…Рѕ, С‚Р°Рє РєР°Рє РЅР°РіСЂСѓР¶Р°РµС‚СЃСЏ РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє
+	//calculateTo(n, 57, 25); //РџР»РѕС…Рѕ, С‚Р°Рє РєР°Рє РЅР°РіСЂСѓР¶Р°РµС‚СЃСЏ РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє
 	
 	//std::thread th1(doSomething);
-	//th1.detach(); //Остановка потока при заверщении основной программы
+	//th1.detach(); //РћСЃС‚Р°РЅРѕРІРєР° РїРѕС‚РѕРєР° РїСЂРё Р·Р°РІРµСЂС‰РµРЅРёРё РѕСЃРЅРѕРІРЅРѕР№ РїСЂРѕРіСЂР°РјРјС‹
 	
 	//std::thread th2(doSomething);
 
@@ -82,12 +82,12 @@ int main() {
 	std::thread th4(calculateTo, std::ref( n), 2134, 4213);
 
 	for (size_t i = 0; i < 10; ++i) {
-		std::cout << "Thread №" << std::this_thread::get_id() << "\tmain()\t\t" << i << std::endl;
+		std::cout << "Thread в„–" << std::this_thread::get_id() << "\tmain()\t\t" << i << std::endl;
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}
 
 
-//th1.join();//"Yсыпление" текущего потока до тех пор пока не будет завершен поток th1
+//th1.join();//"YСЃС‹РїР»РµРЅРёРµ" С‚РµРєСѓС‰РµРіРѕ РїРѕС‚РѕРєР° РґРѕ С‚РµС… РїРѕСЂ РїРѕРєР° РЅРµ Р±СѓРґРµС‚ Р·Р°РІРµСЂС€РµРЅ РїРѕС‚РѕРє th1
 //th2.join();
 	//th3.join();
 	th4.join();
